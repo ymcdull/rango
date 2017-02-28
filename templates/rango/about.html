@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+    <head>
+        <title>About</title>
+    </head>
+
+    <body>
+        <h1>Rango says...</h1>
+        <div>
+            This tutorial has been put together by <strong> {{ authorname }} </strong>! <br /> 
+        </div>
+        <div>
+            Static: <br />
+            <img src="{% static "images/teemo.jpg" %}" alt="Picture of Teemo" />
+            Media: <br />
+            <img src="{{ MEDIA_URL }}diana.jpg" alt="Picture of Diana" />
+
+        </div>
+    </body>
+
+</html>
