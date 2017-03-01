@@ -9,8 +9,9 @@ from rango.models import Page
 def index(request):
     #return HttpResponse("Rango says hey there partner! Well done Frank!")
 	category_list = Category.objects.order_by('-likes')[:5]
+	pages_list = Page.objects.order_by('-views')[:5]
 #	context_dict = {'boldmessage': "Pen, Apple, Ah, Apple-Pen!"}
-	context_dict = {'categories' : category_list}
+	context_dict = {'categories' : category_list, 'pages' : pages_list}
 	return render(request, 'rango/index.html', context = context_dict)
     
 def about(request):

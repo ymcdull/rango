@@ -16,10 +16,11 @@
 
         <div>
         {% if categories %}
+				<h2>Most Liked Categories</h2>
 				<ul>
 					{% for category in categories %}
 						<li> 
-							<a href="/rango/category/ {{ category.slug }}">{{ category.name }}</a>
+							<a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
 						</li>
 					{% endfor %}
 
@@ -30,6 +31,21 @@
 				</div>
 
 
+        <div>
+        {% if pages %}
+				<h2>Most Viewd Pages</h2>
+				<ul>
+					{% for page in pages %}
+						<li> 
+							<a href="{{ page.url }}">{{ page.title }}</a>
+						</li>
+					{% endfor %}
+
+				</ul>
+				{% else %}
+					<strong> There are no pages present. </strong>
+				{% endif %}
+				</div>
 
 
         <div>
