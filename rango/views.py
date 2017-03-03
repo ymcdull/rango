@@ -15,17 +15,40 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime
+
 def index(request):
     #return HttpResponse("Rango says hey there partner! Well done Frank!")
 	category_list = Category.objects.order_by('-likes')[:5]
 	pages_list = Page.objects.order_by('-views')[:5]
 #	context_dict = {'boldmessage': "Pen, Apple, Ah, Apple-Pen!"}
 	context_dict = {'categories' : category_list, 'pages' : pages_list}
-	return render(request, 'rango/index.html', context = context_dict)
-    
+	#return render(request, 'rango/index.html', context = context_dict)
+	#response = render(request, 'rango/index.html', context = context_dict)
+	#visits = int(request.COOKIES.get('visits', '0'))
+	
+	if request.session.get('last_visit'):
+		last_visit_time = request.session.get('last_visit')
+		visits = request.session.get('visits', 0)
+		last_visit_time = datetime.strptime(last_visit_time[:-7], "%Y-%m-%d %H:%M:%S")
+
+		if (datetime.now() - last_visit_time).days > 0:
+			request.session['visits'] = visits + 1
+			request.session['last_visit'] = str(datetime.now())
+	else:
+		request.session['last_visit'] = str(datetime.now())
+		request.session['visits'] = 1
+
+	return render(request, 'rango/index.html', context_dict)
+		
+
 def about(request):
   #  return HttpResponse("Rango says here is the about page. <br/> <a href='/rango/about/'> About</a>")
-	context_dict = {'authorname': "Frank Zhu"}
+	if request.session.get('visits'):
+		count = request.session.get('visits')
+	else:
+		count = 0	
+	context_dict = {'authorname': "Frank Zhu", 'visits': count}
 	return render(request, 'rango/about.html', context = context_dict)
 
 
