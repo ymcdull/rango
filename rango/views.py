@@ -153,11 +153,13 @@ def user_login(request):
 				return HttpResponseRedirect('/rango/')
 
 			else:
-				return HttpResponse("Your Rango account is disabled")
+				#return HttpResponse("Your Rango account is disabled")
+				return render(request, 'rango/login.html', {"disabled_account": True})
 
 		else:
 			print("Invalid login details: {0}, {1}".format(username, password))
-			return HttpResponse("Invalid login details supplied.")
+			#return HttpResponse("Invalid login details supplied.")
+			return render(request, 'rango/login.html', {"bad_details": True})
 
 	else:
 		return render(request, 'rango/login.html', {})

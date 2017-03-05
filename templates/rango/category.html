@@ -4,6 +4,7 @@
 
 {% block body_block %}
 
+	<div class="hero-unit">	
     {% if category %}
         <h1>{{ category.name }}</h1>
         {% if pages %}
@@ -20,4 +21,5 @@
     {% endif %}
 		<a href="/rango/category/{{category.slug}}/add_page/">Add Page</a><br />
 
+	</div>
 {% endblock %}

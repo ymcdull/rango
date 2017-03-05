@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-
+	<div class="hero-unit">
         <h1>Rango says...</h1>
 				<p>This website has been viewed {{ visits }} times.</p>
         <div>
@@ -14,9 +14,10 @@
         </div>
         <div>
             Static: <br />
-            <img src="{% static "images/teemo.jpg" %}" alt="Picture of Teemo" height = "50" width = "50"/>
+            <img src="{% static "images/teemo.jpg" %}" alt="Picture of Teemo" height = "50" width = "50"/> <br />
             Media: <br />
             <img src="{{ MEDIA_URL }}diana.jpg" alt="Picture of Diana" height = "50" width = "50" />
 
         </div>
+	</div>
 {% endblock %}

@@ -6,14 +6,18 @@
 
 {% block body_block %}
 
+	<div class="hero-unit">
 				{% if user.is_authenticated %}
         <h1>Rango says... hello {{ user.username }}!</h1>
 				{% else %}
         <h1>Rango says... hello world!</h1>
 				{% endif %}
+	</div>
 				
 
-        <div>
+
+	<div class="row-fluid">
+        <div class="span6">
         {% if categories %}
 				<h2>Most Liked Categories</h2>
 				<ul>
@@ -30,13 +34,13 @@
 				</div>
 
 
-        <div>
+        <div class="span6">
         {% if pages %}
 				<h2>Most Viewd Pages</h2>
 				<ul>
 					{% for page in pages %}
 						<li> 
-							<a href="{{ page.url }}">{{ page.title }}</a>
+							<a href="{{ page.url }}">{{ page.title }}</a> - {{page.category}} ({{ page.views }} view(s))
 						</li>
 					{% endfor %}
 
