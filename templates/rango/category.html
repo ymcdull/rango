@@ -7,10 +7,14 @@
 	<div class="hero-unit">	
     {% if category %}
         <h1>{{ category.name }}</h1>
+
         {% if pages %}
             <ul>
             {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                <li><a href="/rango/goto/?page_id={{ page.id }}">{{ page.title }}</a></li>
+								{% if page.views >= 1 %}
+									- ({{ page.views }} view(s))
+								{% endif %}
             {% endfor %}
             </ul>
         {% else %}
@@ -20,6 +24,43 @@
         The specified category does not exist!
     {% endif %}
 		<a href="/rango/category/{{category.slug}}/add_page/">Add Page</a><br />
+
+		<p>
+		<b id = 'like_count'> {{ category.likes }}</b> people like this category.
+		{% if user.is_authenticated %}
+			<button id = "likes" data-catid = "{{category.id}}" class="btn btn-mini btn-primary" type = "button">Like</button>
+		{% endif %}
+		</p>
+
+		
+		<!--
+		<div class="container-fluid"> 
+			<p>Search for a page.</p> 
+			<form class="span8 form-search" id="search_form" method="post" action="/rango/category/{{ category_name_url }}/"> 
+				{% csrf_token %}
+
+				<input type="text" class="input-long search-query" name="query" value="{{ category_name }}" id="query" /> 
+				<button type="submit" class="btn btn-success" name="submit" value="Search">Search</button> 
+			</form> 
+		</div>
+
+
+		<div class="container-fluid"> 
+			{% if result_list %} <!-- Display search results in an ordered list --> 
+				<ol> 
+					{% for result in result_list %} 
+						<li> 
+							<strong><a href="{{ result.link }}">{{ result.title }}</a></strong><br /> 
+							<p>{{ result.summary }}</p> 
+						</li> 
+					{% endfor %} 
+				</ol> 
+			{% else %} 
+				<br/> <p>No results found</p> 
+			{% endif %} 
+		</div>
+
+		-->
 
 	</div>
 {% endblock %}
